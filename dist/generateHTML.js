@@ -1,5 +1,5 @@
 const generateHTML = () => {
-    `<!DOCTYPE html>
+    return `<!DOCTYPE html>
     <html lang="en">
     
     <head>
@@ -30,40 +30,73 @@ const generateHTML = () => {
     </html>`
 }
 
-/*const renderName = name => {
-    return `<h2 class="card-title">${name}</h2>`
-}
-
-const renderRole = (icon, role) => {
-    return `<h3 class="card-subtitle mb-2">${icon} ${role}</h3>`
-}
-
-const renderId = id => {
-    `<li class="list-group-item">ID: ${id}</li>`
-}
-
-const renderEmail = email => {
-    `<li class="list-group-item">Email: <a href="mailto:${email}" class="card-link">${email}</a></li>`
-}
-
-const generateCard = (answers) => {
-    `<div class="col-4">
+const renderManager = (answers) => {
+    $(".row").append(`
+        <div class="col-4">
         <div class="card" id="bigCard">
             <div class="card-header">
-            <h2 class="card-title">${name}</h2>
-            <h3 class="card-subtitle mb-2">${icon} ${role}</h3>
+            <h2 class="card-title">${answers.name}</h2>
+            <h3 class="card-subtitle mb-2"><i class="fa fa-briefcase"></i> Manager</h3>
             </div>
             <div class="card-body">
                 <div class="card" id="smallCard">
                     <ul class="list-group list-group-flush">
-                    <li class="list-group-item">ID: ${id}</li>
-                    <li class="list-group-item">Email: <a href="mailto:${email}" class="card-link">${email}</a></li>
-                        <li class="list-group-item">Office number/GitHub/School:</li>
+                    <li class="list-group-item">ID: ${answers.id}</li>
+                    <li class="list-group-item">Email: <a href="mailto:${answers.email}" class="card-link">${answers.email}</a></li>
+                        <li class="list-group-item">Office number: ${answers.office}</li>
                     </ul>
                 </div>
             </div>
         </div>
-    </div>`
-}*/
+    </div>`);
+}
 
-module.exports = generateHTML;
+const renderEngineer = (answers) => {
+    $(".row").append(`
+        <div class="col-4">
+        <div class="card" id="bigCard">
+            <div class="card-header">
+            <h2 class="card-title">${answers.name}</h2>
+            <h3 class="card-subtitle mb-2"><i class="fa fa-code-fork"></i> Engineer</h3>
+            </div>
+            <div class="card-body">
+                <div class="card" id="smallCard">
+                    <ul class="list-group list-group-flush">
+                    <li class="list-group-item">ID: ${answers.id}</li>
+                    <li class="list-group-item">Email: <a href="mailto:${answers.email}" class="card-link">${answers.email}</a></li>
+                        <li class="list-group-item">GitHub: <a href="https://github.com/${answers.github}" target="_blank">${answers.github}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>`);
+}
+
+const renderIntern = (answers) => {
+    $(".row").append(`
+        <div class="col-4">
+        <div class="card" id="bigCard">
+            <div class="card-header">
+            <h2 class="card-title">${answers.name}</h2>
+            <h3 class="card-subtitle mb-2"><i class="fa fa-graduation-cap"></i> Intern</h3>
+            </div>
+            <div class="card-body">
+                <div class="card" id="smallCard">
+                    <ul class="list-group list-group-flush">
+                    <li class="list-group-item">ID: ${answers.id}</li>
+                    <li class="list-group-item">Email: <a href="mailto:${answers.email}" class="card-link">${answers.email}</a></li>
+                        <li class="list-group-item">School: ${answers.school}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>`);
+}
+
+
+module.exports = {
+    generateHTML,
+    renderManager,
+    renderEngineer,
+    renderIntern
+}

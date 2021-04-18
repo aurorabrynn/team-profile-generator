@@ -4,21 +4,24 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const employees = [];
-const generateHTML = require("./dist/generateHTML.js");
+const { generateHTML } = require("./dist/generateHTML.js");
+const { renderManager } = require("./dist/generateHTML.js");
+const { renderEngineer } = require("./dist/generateHTML.js");
+const { renderIntern } = require("./dist/generateHTML.js");
 const generateCSS = require("./dist/generateCSS.js");
 
-/*function generateWebpage () {
-    fs.writeFile(`index.html`, generateHTML, (err) => {
+function generateWebpage() {
+    fs.writeFile(`index.html`, generateHTML(), (err) => {
         if (err) {
             throw err;
         }
     });
-    fs.writeFile(`style.css`, generateCSS, (err) => {
+    fs.writeFile(`style.css`, generateCSS(), (err) => {
         if (err) {
             throw err;
         }
     });
-}*/
+}
 
 function askQuestion() {
     inquirer.prompt([
@@ -46,6 +49,30 @@ function askQuestion() {
 
             default:
                 console.log("Thank you!")
+                generateWebpage()
+                    .then((answers) => {
+                        for (let i = 0; i < employees.length; i++) {
+                            if (Manager) {
+                                fs.appendFile(`index.html`, renderManager(answers), (err) => {
+                                    if (err) {
+                                        throw err;
+                                    }
+                                });
+                            } else if (Engineer) {
+                                fs.appendFile(`index.html`, renderEngineer(answers), (err) => {
+                                    if (err) {
+                                        throw err;
+                                    }
+                                });
+                            } else if (Intern) {
+                                fs.appendFile(`index.html`, renderIntern(answers), (err) => {
+                                    if (err) {
+                                        throw err;
+                                    }
+                                });
+                            }
+                        }
+                    })
                 break;
         }
     })
@@ -74,28 +101,10 @@ function addManager() {
             message: "What is their office number?",
             type: "input"
         },
-    ]).then(addManagerAnswers => {
-        const me = new Manager(addManagerAnswers.name, addManagerAnswers.id, addManagerAnswers.email, addManagerAnswers.office);
+    ]).then(answers => {
+        const me = new Manager(answers.name, answers.id, answers.email, answers.office);
         employees.push(me)
         console.log(employees);
-       /* $(".row").append(`
-        <div class="col-4">
-        <div class="card" id="bigCard">
-            <div class="card-header">
-            <h2 class="card-title">${addManagerAnswers.name}</h2>
-            <h3 class="card-subtitle mb-2"><i class="fa fa-briefcase"></i> Manager</h3>
-            </div>
-            <div class="card-body">
-                <div class="card" id="smallCard">
-                    <ul class="list-group list-group-flush">
-                    <li class="list-group-item">ID: ${addManagerAnswers.id}</li>
-                    <li class="list-group-item">Email: <a href="mailto:${addManagerAnswers.email}" class="card-link">${addManagerAnswers.email}</a></li>
-                        <li class="list-group-item">Office number: ${addManagerAnswers.office}</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>`);*/
         askQuestion();
     })
 }
@@ -122,9 +131,9 @@ function addEngineer() {
             message: "What is their github link?",
             type: "input"
         },
-    ]).then(addEngineerAnswers => {
-        console.log(addEngineerAnswers);
-        const me = new Engineer(addEngineerAnswers.name, addEngineerAnswers.id, addEngineerAnswers.email, addEngineerAnswers.github);
+    ]).then(answers => {
+        console.log(answers);
+        const me = new Engineer(answers.name, answers.id, answers.email, answers.github);
         employees.push(me)
         console.log(employees);
         askQuestion();
@@ -153,9 +162,9 @@ function addIntern() {
             message: "Where do they go to school?",
             type: "input"
         },
-    ]).then(addInternAnswers => {
-        console.log(addInternAnswers);
-        const me = new Intern(addInternAnswers.name, addInternAnswers.id, addInternAnswers.email, addInternAnswers.school);
+    ]).then(answers => {
+        console.log(answers);
+        const me = new Intern(answers.name, answers.id, answers.email, answers.school);
         employees.push(me)
         console.log(employees);
         askQuestion();
