@@ -1,4 +1,4 @@
-const generateHTML = () => {
+const generateTopHTML = () => {
     return `<!DOCTYPE html>
     <html lang="en">
     
@@ -17,12 +17,16 @@ const generateHTML = () => {
             <h1>My Team</h1>
         </header>
     
-        <div class="row justify-content-center">
-        
-        </div>
+        <div class="row justify-content-center" id="row">
+        `
+}
+
+const generateBottomHTML = () => {
+    return `</div>
     
     </body>
     
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -31,7 +35,7 @@ const generateHTML = () => {
 }
 
 const renderManager = (answers) => {
-    $(".row").append(`
+   return `
         <div class="col-4">
         <div class="card" id="bigCard">
             <div class="card-header">
@@ -43,16 +47,16 @@ const renderManager = (answers) => {
                     <ul class="list-group list-group-flush">
                     <li class="list-group-item">ID: ${answers.id}</li>
                     <li class="list-group-item">Email: <a href="mailto:${answers.email}" class="card-link">${answers.email}</a></li>
-                        <li class="list-group-item">Office number: ${answers.office}</li>
+                        <li class="list-group-item">Office number: ${answers.officeNumber}</li>
                     </ul>
                 </div>
             </div>
         </div>
-    </div>`);
+    </div>`
 }
 
 const renderEngineer = (answers) => {
-    $(".row").append(`
+    return `
         <div class="col-4">
         <div class="card" id="bigCard">
             <div class="card-header">
@@ -69,11 +73,11 @@ const renderEngineer = (answers) => {
                 </div>
             </div>
         </div>
-    </div>`);
+    </div>`
 }
 
 const renderIntern = (answers) => {
-    $(".row").append(`
+    return `
         <div class="col-4">
         <div class="card" id="bigCard">
             <div class="card-header">
@@ -90,12 +94,14 @@ const renderIntern = (answers) => {
                 </div>
             </div>
         </div>
-    </div>`);
+    </div>`
 }
 
+//row.appendChild(renderManager(answers));
 
 module.exports = {
-    generateHTML,
+    generateTopHTML,
+    generateBottomHTML,
     renderManager,
     renderEngineer,
     renderIntern

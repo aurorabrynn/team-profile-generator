@@ -4,19 +4,55 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const employees = [];
-const { generateHTML } = require("./dist/generateHTML.js");
+const { generateTopHTML } = require("./dist/generateHTML.js");
+const { generateBottomHTML } = require("./dist/generateHTML.js");
 const { renderManager } = require("./dist/generateHTML.js");
 const { renderEngineer } = require("./dist/generateHTML.js");
 const { renderIntern } = require("./dist/generateHTML.js");
 const generateCSS = require("./dist/generateCSS.js");
+const i = 0;
+/*new Manager("Aurora", "1", "aurorabrynn@gmail.com", "100"), new Engineer("Erin", "2", "erin@falsemail.com", "rogueerin"), new Engineer("Miriam", "3", "miriam@falsemail.com", "wizardmiriam"), new Intern("Robin", "4", "robin@falsemail.com", "University of Washington"), new Intern("Maybel", "5", "maybel@falsemail.com", "University of Oregon")*/
 
 function generateWebpage() {
-    fs.writeFile(`index.html`, generateHTML(), (err) => {
+    fs.writeFile(`index.html`, generateTopHTML(), (err) => {
         if (err) {
             throw err;
         }
     });
     fs.writeFile(`style.css`, generateCSS(), (err) => {
+        if (err) {
+            throw err;
+        }
+    });
+}
+
+function renderCards() {
+    employees.forEach(employees => {
+        if (employees.role === "Manager") {
+            fs.appendFile(`index.html`, renderManager(employees), (err) => {
+                if (err) {
+                    throw err;
+                }
+            });
+        } else if (employees.role === "Engineer") {
+            fs.appendFile(`index.html`, renderEngineer(employees), (err) => {
+                if (err) {
+                    throw err;
+                }
+            });
+        } else if (employees.role === "Intern") {
+            fs.appendFile(`index.html`, renderIntern(employees), (err) => {
+                if (err) {
+                    throw err;
+                }
+            });
+        }
+    }
+    )
+}
+
+function generateBottom() {
+    fs.appendFile(`index.html`, generateBottomHTML(), (err) => {
         if (err) {
             throw err;
         }
@@ -49,30 +85,9 @@ function askQuestion() {
 
             default:
                 console.log("Thank you!")
-                generateWebpage()
-                    .then((answers) => {
-                        for (let i = 0; i < employees.length; i++) {
-                            if (Manager) {
-                                fs.appendFile(`index.html`, renderManager(answers), (err) => {
-                                    if (err) {
-                                        throw err;
-                                    }
-                                });
-                            } else if (Engineer) {
-                                fs.appendFile(`index.html`, renderEngineer(answers), (err) => {
-                                    if (err) {
-                                        throw err;
-                                    }
-                                });
-                            } else if (Intern) {
-                                fs.appendFile(`index.html`, renderIntern(answers), (err) => {
-                                    if (err) {
-                                        throw err;
-                                    }
-                                });
-                            }
-                        }
-                    })
+                generateWebpage();
+                renderCards();
+                generateBottom();
                 break;
         }
     })
@@ -171,4 +186,4 @@ function addIntern() {
     })
 }
 
-askQuestion()
+askQuestion();

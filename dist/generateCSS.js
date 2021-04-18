@@ -19,7 +19,7 @@ const generateCSS = () => {
     }
     
     .col-4 {
-        margin-top: 2vw;
+        margin-bottom: 2vw;
     }
     
     #bigCard {
@@ -29,7 +29,7 @@ const generateCSS = () => {
     }
     
     #smallCard {
-        width: 15rem;
+        width: 15.4rem;
     }
     
     .card-header {
