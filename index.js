@@ -10,8 +10,6 @@ const { renderManager } = require("./dist/generateHTML.js");
 const { renderEngineer } = require("./dist/generateHTML.js");
 const { renderIntern } = require("./dist/generateHTML.js");
 const generateCSS = require("./dist/generateCSS.js");
-const i = 0;
-/*new Manager("Aurora", "1", "aurorabrynn@gmail.com", "100"), new Engineer("Erin", "2", "erin@falsemail.com", "rogueerin"), new Engineer("Miriam", "3", "miriam@falsemail.com", "wizardmiriam"), new Intern("Robin", "4", "robin@falsemail.com", "University of Washington"), new Intern("Maybel", "5", "maybel@falsemail.com", "University of Oregon")*/
 
 function generateWebpage() {
     fs.writeFile(`index.html`, generateTopHTML(), (err) => {
@@ -147,7 +145,6 @@ function addEngineer() {
             type: "input"
         },
     ]).then(answers => {
-        console.log(answers);
         const me = new Engineer(answers.name, answers.id, answers.email, answers.github);
         employees.push(me)
         console.log(employees);
@@ -178,7 +175,6 @@ function addIntern() {
             type: "input"
         },
     ]).then(answers => {
-        console.log(answers);
         const me = new Intern(answers.name, answers.id, answers.email, answers.school);
         employees.push(me)
         console.log(employees);
