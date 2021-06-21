@@ -2,7 +2,7 @@
 ![badge](https://img.shields.io/badge/license-MIT-green)
 
 ## Description
-I made a team profile generator. When you're on a team (especially if it's a large group), it's important to know what roles everyone has, so that the manager doesn't give out tasks to the wrong people. Plus, if there's a problem, employees know who to talk to. Keeping this important info all in one, concise place keeps employees from getting confused.
+This is a team profile generator. When you're on a team (especially if it's a large group), it's important to know what roles everyone has, so that the manager doesn't give out tasks to the wrong people. Plus, if there's a problem, employees know who to talk to. Keeping this important info all in one, concise place keeps employees from getting confused.
 
 I learned how to use fs.appendFile and how important "return" is.
 
