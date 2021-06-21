@@ -7,7 +7,7 @@ I made a team profile generator. When you're on a team (especially if it's a lar
 I learned how to use fs.appendFile and how important "return" is.
 
 ## Video Walkthrough
-![Video Walkthrough](https://drive.google.com/file/d/1uH7Uiidhl3Kyol8zoOU8_w4wuQxDdAPf/view)
+<a href="https://user-images.githubusercontent.com/70443846/122809720-55fb1880-d283-11eb-8e9a-8137c59ea4f0.mp4"></a>
 
 ## Link
 <a href="https://aurorabrynn.github.io/team-profile-generator/">Github Link</a>
